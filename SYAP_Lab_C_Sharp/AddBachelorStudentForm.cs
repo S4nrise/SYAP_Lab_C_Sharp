@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SYAP_Lab_C_Sharp.Classes;
+using System;
 using System.Windows.Forms;
 
 namespace SYAP_Lab_C_Sharp
@@ -10,32 +11,28 @@ namespace SYAP_Lab_C_Sharp
     }
     public partial class AddStudentBachelorForm : Form
     {
-        public AddStudentBachelorForm(Modes mode)    //Add - добавить, Edit - редактировать
+        public readonly Bachelor bachelor;
+        public AddStudentBachelorForm(Modes mode,Bachelor bachelor=null)    //Add - добавить, Edit - редактировать
         {
             InitializeComponent();
             if (mode == Modes.Edit)
             {
                 AddButton.Text = "Изменить";
                 Text = "Изменить бакалавра";
-
-                FNameTextBox.Text = FName;
-                SNameTextBox.Text = SName;
-                SYearTextBox.Text = Age.ToString();
-                FacultyTextBox.Text = Faculty;
-                RatingTextBox.Text = Rating.ToString();
+                this.bachelor = bachelor;
+                FNameTextBox.Text = bachelor.FName;
+                SNameTextBox.Text = bachelor.SName;
+                SYearTextBox.Text = bachelor.Age.ToString();
+                FacultyTextBox.Text = bachelor.Faculty;
+                RatingTextBox.Text = bachelor.Rating.ToString();
             }
             else
             {
                 AddButton.Text = "Добавить";
                 Text = "Добавить бакалавра";
+                this.bachelor = new Bachelor();
             }
         }
-
-        public static string FName;
-        public static string SName;
-        public static int Age;
-        public static string Faculty;
-        public static int Rating;
 
         private void AddButton_Click(object sender, EventArgs e)
         {
@@ -54,22 +51,22 @@ namespace SYAP_Lab_C_Sharp
                 MessageBox.Show("Введите факультет бакалавра");
                 return;
             }
-            if (SYearTextBox.Text == "")
+            if (SYearTextBox.Text == "" || !int.TryParse(RatingTextBox.Text, out int age))
             {
-                MessageBox.Show("Введите возраст бакалавра");
+                MessageBox.Show("Введите корректно возраст бакалавра");
                 return;
             }
-            if (RatingTextBox.Text == "")
+            if (RatingTextBox.Text == "" || !int.TryParse(RatingTextBox.Text, out int rat))
             {
-                MessageBox.Show("Введите рейтинг бакалавра");
+                MessageBox.Show("Введите корректно рейтинг бакалавра");
                 return;
             }
-            FName = FNameTextBox.Text;
-            SName = SNameTextBox.Text;
-            Age = int.Parse(SYearTextBox.Text);
-            Faculty = FacultyTextBox.Text;
-            Rating = int.Parse(RatingTextBox.Text);
-
+            bachelor.FName = FNameTextBox.Text;
+            bachelor.SName = SNameTextBox.Text;
+            bachelor.Age = age;
+            bachelor.Faculty = FacultyTextBox.Text;
+            bachelor.Rating = rat;
+            
             DialogResult = DialogResult.OK;
             Close();
         }

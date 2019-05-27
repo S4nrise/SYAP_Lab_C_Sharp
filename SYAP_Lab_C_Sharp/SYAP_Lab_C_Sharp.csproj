@@ -59,7 +59,8 @@
       <DependentUpon>AddMasterStudentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Bachelor.cs" />
-    <Compile Include="Classes\BusinessLogic.cs" />
+    <Compile Include="Classes\Students.cs" />
+    <Compile Include="Logic\BusinessLogic.cs" />
     <Compile Include="Classes\Master.cs" />
     <Compile Include="Classes\NoneStudentsException.cs" />
     <Compile Include="Classes\Student.cs" />

@@ -19,6 +19,7 @@ namespace SYAP_Lab_C_Sharp
         {
             InitializeComponent();
             StudentListViewSet();
+            students = new Students();
         }
 
 
@@ -27,7 +28,7 @@ namespace SYAP_Lab_C_Sharp
         //Попытаться разделить на б/л и интерфейс
         //Ex возник в б/л 
         //Отловить в интерфейсе
-        List<Student> StudentList = new List<Student>();
+        Students students;
         int curStud = -1;
 
         //Кнопка Открыть
@@ -38,7 +39,7 @@ namespace SYAP_Lab_C_Sharp
             {
                 var fStream = new FileStream(openFileDialog.FileName, FileMode.Open,FileAccess.Read);
                 var xmls = new XmlSerializer(typeof(List<Student>));
-                StudentList = (List<Student>)xmls.Deserialize(fStream); 
+                students.StudentList = (List<Student>)xmls.Deserialize(fStream); 
                 listView.Items.Add(openFileDialog.SafeFileName.Substring(0, openFileDialog.SafeFileName.Length - 4));
                 UpdateStudentListView();
                 fStream.Close();
@@ -54,7 +55,7 @@ namespace SYAP_Lab_C_Sharp
                 var fileName = saveFileDialog.FileName;
                 var fSream = new FileStream(fileName, FileMode.Create);
                 var xmls = new XmlSerializer(typeof(List<Student>));
-                xmls.Serialize(fSream, StudentList);  
+                xmls.Serialize(fSream, students.StudentList);  
                 fSream.Close();
             }
         }
@@ -62,29 +63,18 @@ namespace SYAP_Lab_C_Sharp
         //Кнопка Бакалавр
         private void BachelorToolStripMenuItem_Click(object sender, EventArgs e)        
         {
-            Form AddStudent = new AddStudentBachelorForm(Modes.Add);     //Вызываем окошко добавления студента
-            if (AddStudent.ShowDialog() == DialogResult.OK)     
-                StudentList.Add(new Bachelor(
-                    AddStudentBachelorForm.FName,
-                    AddStudentBachelorForm.SName,
-                    AddStudentBachelorForm.Age,
-                    AddStudentBachelorForm.Faculty,
-                    AddStudentBachelorForm.Rating));
+            var AddStudent = new AddStudentBachelorForm(Modes.Add);     //Вызываем окошко добавления студента
+            if (AddStudent.ShowDialog() == DialogResult.OK)
+                students.Add(AddStudent.bachelor);
             UpdateStudentListView();
         }
 
         //Кнопка Магистр
         private void MasterToolStripMenuItem_Click(object sender, EventArgs e)  
         {
-            Form AddStudent = new AddStudentMasterForm(Modes.Add);       //Вызываем окошко добавления студента
+            var AddStudent = new AddStudentMasterForm(Modes.Add);       //Вызываем окошко добавления студента
             if (AddStudent.ShowDialog() == DialogResult.OK)
-                StudentList.Add(new Master(
-                    AddStudentMasterForm.FName,
-                    AddStudentMasterForm.SName,
-                    AddStudentMasterForm.Age,
-                    AddStudentMasterForm.Faculty,
-                    AddStudentMasterForm.ThemeWork,
-                    AddStudentMasterForm.Number));
+                students.Add(AddStudent.master);
             UpdateStudentListView();
         }
 
@@ -92,9 +82,8 @@ namespace SYAP_Lab_C_Sharp
         private void UpdateStudentListView()
         {
             StudentListView.Clear();
-            foreach (Student stud in StudentList)
-            {
-                
+            foreach (Student stud in students)
+            {                
                 var studtemp = stud is Bachelor ? "Бакалавр" : "Магистр";
                 var LVI = new ListViewItem(new[]
                 {
@@ -124,92 +113,60 @@ namespace SYAP_Lab_C_Sharp
         //Удаление студента
         private void DeleateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StudentList.RemoveAt(StudentListView.FocusedItem.Index);
+            students.RemoveAt(StudentListView.FocusedItem.Index);
             StudentListView.FocusedItem.Remove();
         }
 
         private void EditStudentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Редактирование
-            if (StudentListView.Focused==true) 
-                {
-                var temp = StudentList[StudentListView.FocusedItem.Index];
-                
-                if (temp is Bachelor)
-                {
-                    Bachelor sur = (Bachelor)temp;
-                    AddStudentBachelorForm.FName = sur.FName;
-                    AddStudentBachelorForm.SName = sur.SName;
-                    AddStudentBachelorForm.Age = sur.Age;
-                    AddStudentBachelorForm.Faculty = sur.Faculty;
-                    AddStudentBachelorForm.Rating = sur.Rating;
-
-                    Form EditStudent = new AddStudentBachelorForm(Modes.Edit);     //Вызываем редатирование студента
-                    if (EditStudent.ShowDialog() == DialogResult.OK)
-                    {
-                        sur.FName = AddStudentBachelorForm.FName;
-                        sur.SName = AddStudentBachelorForm.SName;
-                        sur.Age = AddStudentBachelorForm.Age;
-                        sur.Faculty = AddStudentBachelorForm.Faculty;
-                        sur.Rating = AddStudentBachelorForm.Rating;
-                        UpdateStudentListView();
-                    }
-                }
-                else if (temp is Master)
-                {
-                    Master sur = (Master)temp;
-                    AddStudentMasterForm.FName = sur.FName;
-                    AddStudentMasterForm.SName = sur.SName;
-                    AddStudentMasterForm.Age = sur.Age;
-                    AddStudentMasterForm.Faculty = sur.Faculty;
-                    AddStudentMasterForm.ThemeWork = sur.ThemeWork;
-                    AddStudentMasterForm.Number = sur.Number;
-
-                    Form EditStudent = new AddStudentMasterForm(Modes.Edit);
-                    if (EditStudent.ShowDialog() == DialogResult.OK)
-                    {
-                        sur.FName = AddStudentMasterForm.FName;
-                        sur.SName = AddStudentMasterForm.SName;
-                        sur.Age = AddStudentMasterForm.Age;
-                        sur.Faculty = AddStudentMasterForm.Faculty;
-                        sur.ThemeWork = AddStudentMasterForm.ThemeWork;
-                        sur.Number = AddStudentMasterForm.Number;
-                        UpdateStudentListView();
-                    }
-                }
+            if (StudentListView.FocusedItem is null)
+            {
+                MessageBox.Show("Выберете студента для редактирования");
+                return;
             }
-            else MessageBox.Show ("Выберете студента для редактирования");
+
+            var temp = students[StudentListView.FocusedItem.Index];
+
+            if (temp is Bachelor)
+            {
+                var EditStudent = new AddStudentBachelorForm(Modes.Edit,(Bachelor)temp);     //Вызываем редатирование студента
+                if (EditStudent.ShowDialog() == DialogResult.OK) UpdateStudentListView();                
+            }
+            else if (temp is Master)
+            {
+                var EditStudent = new AddStudentMasterForm(Modes.Edit,(Master)temp);
+                if (EditStudent.ShowDialog() == DialogResult.OK) UpdateStudentListView();               
+            }
         }
 
         //Следующий студент
         private void NextStudentButton_Click(object sender, EventArgs e)
         {
-            curStud++;
-            if (curStud >= 0 && curStud < StudentList.Count)
-            {
-                StudentListView.Items[curStud].Focused = true;
-                StudentListView.Select();
-            }
-            if (curStud > StudentList.Count) curStud--;
+            if (curStud == -1 || curStud == students.Count - 1) return;
+            ListViewSelect(curStud, false);
+            ListViewSelect(curStud + 1, true);
         }
 
         //Предыдущий студент
         private void PreviousStudentButton_Click(object sender, EventArgs e)
         {
-            if (curStud < -1) return;
-            curStud--;
-            if (curStud < 0) curStud = 0;
-            if (curStud >= 0 && curStud <= StudentList.Count)
-            {
-                StudentListView.Items[curStud].Focused = true;
-                StudentListView.Select();
-            }
+            if (curStud < 1) return;
+            ListViewSelect(curStud, false);
+            ListViewSelect(curStud - 1, true);
+        }
+
+        //Подсветка студентов
+        void ListViewSelect(int index, bool val)
+        {
+            StudentListView.Items[index].Focused = val;
+            StudentListView.Items[index].Selected = val;
         }
 
         //Кнопка закрыть лист
         private void CloseMainFormToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StudentList.Clear();
+            students.Clear();
             listView.Clear();
             UpdateStudentListView();
         }
@@ -217,7 +174,8 @@ namespace SYAP_Lab_C_Sharp
         //Синхронизировать выбранного студента с curStud
         private void StudentListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            curStud = StudentListView.FocusedItem.Index;
+            if (StudentListView.FocusedItem != null)
+                curStud = StudentListView.FocusedItem.Index;
         }
     }
 }

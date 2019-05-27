@@ -281,6 +281,7 @@
             this.Controls.Add(this.mainMenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.mainMenuStrip;
+            this.MaximizeBox = false;
             this.Name = "mainForm";
             this.Text = "Студенты";
             this.mainMenuStrip.ResumeLayout(false);

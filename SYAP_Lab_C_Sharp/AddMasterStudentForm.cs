@@ -1,37 +1,34 @@
-﻿using System;
+﻿using SYAP_Lab_C_Sharp.Classes;
+using System;
 using System.Windows.Forms;
 
 namespace SYAP_Lab_C_Sharp
 {
     public partial class AddStudentMasterForm : Form
     {
-        public AddStudentMasterForm(Modes Mode)
+        public readonly Master master;
+        public AddStudentMasterForm(Modes Mode,Master master=null)
         {
             InitializeComponent();
             if (Mode == Modes.Edit)
             {
                 AddButton.Text = "Изменить";
                 Text = "Изменить магистра";
-                FNameTextBox.Text = FName;
-                SNameTextBox.Text = SName;
-                SYearTextBox.Text = Age.ToString();
-                FacultyTextBox.Text = Faculty;
-                ThemeWorkTextBox.Text = ThemeWork;
-                NumberTextBox.Text = Number.ToString();
+                this.master = master;
+                FNameTextBox.Text = master.FName;
+                SNameTextBox.Text = master.SName;
+                SYearTextBox.Text = master.Age.ToString();
+                FacultyTextBox.Text = master.Faculty;
+                ThemeWorkTextBox.Text = master.ThemeWork;
+                NumberTextBox.Text = master.Number.ToString();
             }
             else
             {
                 AddButton.Text = "Добавить";
                 Text = "Добавить магистра";
+                this.master = new Master();
             }
         }
-
-        public static string FName;
-        public static string SName;
-        public static int Age;
-        public static string Faculty;
-        public static string ThemeWork;
-        public static int Number;
 
         private void AddButton_Click(object sender, EventArgs e)
         {
@@ -50,9 +47,9 @@ namespace SYAP_Lab_C_Sharp
                 MessageBox.Show("Введите факультет магистра");
                 return;
             }
-            if (SYearTextBox.Text == "")
+            if (SYearTextBox.Text == "" || !int.TryParse(SYearTextBox.Text, out int age))
             {
-                MessageBox.Show("Введите возраст магистра");
+                MessageBox.Show("Введите корректно возраст магистра");
                 return;
             }
             if (ThemeWorkTextBox.Text == "")
@@ -60,17 +57,17 @@ namespace SYAP_Lab_C_Sharp
                 MessageBox.Show("Введите тему работы магистра");
                 return;
             }
-            if (NumberTextBox.Text == "")
+            if (NumberTextBox.Text == "" || !int.TryParse(NumberTextBox.Text, out int num))
             {
-                MessageBox.Show("Введите номер магистра");
+                MessageBox.Show("Введите корректно номер магистра");
                 return;
             }
-            FName = FNameTextBox.Text;
-            SName = SNameTextBox.Text;
-            Age = int.Parse(SYearTextBox.Text);
-            Faculty = FacultyTextBox.Text;
-            ThemeWork = ThemeWorkTextBox.Text;
-            Number = int.Parse(NumberTextBox.Text);
+            master.FName = FNameTextBox.Text;
+            master.SName = SNameTextBox.Text;
+            master.Age = age;
+            master.Faculty = FacultyTextBox.Text;
+            master.ThemeWork = ThemeWorkTextBox.Text;
+            master.Number = num;
 
             DialogResult = DialogResult.OK;
             Close();
