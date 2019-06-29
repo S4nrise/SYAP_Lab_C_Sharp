@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace SYAP_Lab_C_Sharp.Classes
 {
+    [Serializable]
     public class Students : IEnumerable<Student>
     {
-        public List<Student> StudentList;
+        private List<Student> StudentList;
 
         public Students()
         {
@@ -18,7 +19,7 @@ namespace SYAP_Lab_C_Sharp.Classes
 
         public int Count
         {
-            get => StudentList.Count;
+            get { return StudentList.Count; }
         }
 
         public void Add(Student student)
@@ -49,8 +50,8 @@ namespace SYAP_Lab_C_Sharp.Classes
 
         public Student this[int index]
         {
-            get => StudentList[index];
-            set => StudentList[index] = value;
+            get { return StudentList[index]; }
+            set { StudentList[index] = value; }
         }
     }
 }

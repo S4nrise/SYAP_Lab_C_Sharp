@@ -60,14 +60,14 @@
             this.FacultyTextBox.Location = new System.Drawing.Point(133, 90);
             this.FacultyTextBox.Name = "FacultyTextBox";
             this.FacultyTextBox.Size = new System.Drawing.Size(160, 20);
-            this.FacultyTextBox.TabIndex = 2;
+            this.FacultyTextBox.TabIndex = 3;
             // 
             // SYearTextBox
             // 
             this.SYearTextBox.Location = new System.Drawing.Point(133, 64);
             this.SYearTextBox.Name = "SYearTextBox";
             this.SYearTextBox.Size = new System.Drawing.Size(160, 20);
-            this.SYearTextBox.TabIndex = 3;
+            this.SYearTextBox.TabIndex = 2;
             // 
             // FNameLabel
             // 
@@ -110,7 +110,7 @@
             this.AddButton.Location = new System.Drawing.Point(133, 143);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
-            this.AddButton.TabIndex = 8;
+            this.AddButton.TabIndex = 5;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
@@ -129,7 +129,7 @@
             this.RatingTextBox.Location = new System.Drawing.Point(133, 117);
             this.RatingTextBox.Name = "RatingTextBox";
             this.RatingTextBox.Size = new System.Drawing.Size(160, 20);
-            this.RatingTextBox.TabIndex = 10;
+            this.RatingTextBox.TabIndex = 4;
             // 
             // AddStudentBachelorForm
             // 

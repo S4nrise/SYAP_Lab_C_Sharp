@@ -32,6 +32,7 @@ namespace SYAP_Lab_C_Sharp
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+			int age, num;
             if (FNameTextBox.Text == "")
             {
                 MessageBox.Show("Введите имя магистра");
@@ -47,7 +48,7 @@ namespace SYAP_Lab_C_Sharp
                 MessageBox.Show("Введите факультет магистра");
                 return;
             }
-            if (SYearTextBox.Text == "" || !int.TryParse(SYearTextBox.Text, out int age))
+            if (SYearTextBox.Text == "" || !int.TryParse(SYearTextBox.Text, out age))
             {
                 MessageBox.Show("Введите корректно возраст магистра");
                 return;
@@ -57,7 +58,7 @@ namespace SYAP_Lab_C_Sharp
                 MessageBox.Show("Введите тему работы магистра");
                 return;
             }
-            if (NumberTextBox.Text == "" || !int.TryParse(NumberTextBox.Text, out int num))
+            if (NumberTextBox.Text == "" || !int.TryParse(NumberTextBox.Text, out num))
             {
                 MessageBox.Show("Введите корректно номер магистра");
                 return;

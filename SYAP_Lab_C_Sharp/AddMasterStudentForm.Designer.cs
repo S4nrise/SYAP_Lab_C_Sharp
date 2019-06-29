@@ -48,7 +48,7 @@
             this.ThemeWorkTextBox.Location = new System.Drawing.Point(125, 117);
             this.ThemeWorkTextBox.Name = "ThemeWorkTextBox";
             this.ThemeWorkTextBox.Size = new System.Drawing.Size(160, 20);
-            this.ThemeWorkTextBox.TabIndex = 21;
+            this.ThemeWorkTextBox.TabIndex = 4;
             // 
             // ThemeWorkLabel
             // 
@@ -64,7 +64,7 @@
             this.AddButton.Location = new System.Drawing.Point(125, 186);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
-            this.AddButton.TabIndex = 19;
+            this.AddButton.TabIndex = 6;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
@@ -110,28 +110,28 @@
             this.SYearTextBox.Location = new System.Drawing.Point(125, 64);
             this.SYearTextBox.Name = "SYearTextBox";
             this.SYearTextBox.Size = new System.Drawing.Size(160, 20);
-            this.SYearTextBox.TabIndex = 14;
+            this.SYearTextBox.TabIndex = 2;
             // 
             // FacultyTextBox
             // 
             this.FacultyTextBox.Location = new System.Drawing.Point(125, 90);
             this.FacultyTextBox.Name = "FacultyTextBox";
             this.FacultyTextBox.Size = new System.Drawing.Size(160, 20);
-            this.FacultyTextBox.TabIndex = 13;
+            this.FacultyTextBox.TabIndex = 3;
             // 
             // SNameTextBox
             // 
             this.SNameTextBox.Location = new System.Drawing.Point(125, 38);
             this.SNameTextBox.Name = "SNameTextBox";
             this.SNameTextBox.Size = new System.Drawing.Size(160, 20);
-            this.SNameTextBox.TabIndex = 12;
+            this.SNameTextBox.TabIndex = 1;
             // 
             // FNameTextBox
             // 
             this.FNameTextBox.Location = new System.Drawing.Point(125, 12);
             this.FNameTextBox.Name = "FNameTextBox";
             this.FNameTextBox.Size = new System.Drawing.Size(160, 20);
-            this.FNameTextBox.TabIndex = 11;
+            this.FNameTextBox.TabIndex = 0;
             // 
             // NumberLabel
             // 
@@ -147,7 +147,7 @@
             this.NumberTextBox.Location = new System.Drawing.Point(125, 144);
             this.NumberTextBox.Name = "NumberTextBox";
             this.NumberTextBox.Size = new System.Drawing.Size(160, 20);
-            this.NumberTextBox.TabIndex = 23;
+            this.NumberTextBox.TabIndex = 5;
             // 
             // AddStudentMasterForm
             // 

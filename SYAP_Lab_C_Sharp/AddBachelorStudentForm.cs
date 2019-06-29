@@ -36,6 +36,7 @@ namespace SYAP_Lab_C_Sharp
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+			int age, rat;
             if (FNameTextBox.Text == "")
             {
                 MessageBox.Show("Введите имя бакалавра");
@@ -45,18 +46,18 @@ namespace SYAP_Lab_C_Sharp
             {
                 MessageBox.Show("Введите фамилию бакалавра");
                 return;
+            }            
+            if (SYearTextBox.Text == "" || !int.TryParse(SYearTextBox.Text, out age))
+            {
+                MessageBox.Show("Введите корректно курс бакалавра");
+                return;
             }
             if (FacultyTextBox.Text == "")
             {
                 MessageBox.Show("Введите факультет бакалавра");
                 return;
             }
-            if (SYearTextBox.Text == "" || !int.TryParse(RatingTextBox.Text, out int age))
-            {
-                MessageBox.Show("Введите корректно возраст бакалавра");
-                return;
-            }
-            if (RatingTextBox.Text == "" || !int.TryParse(RatingTextBox.Text, out int rat))
+            if (RatingTextBox.Text == "" || !int.TryParse(RatingTextBox.Text, out rat))
             {
                 MessageBox.Show("Введите корректно рейтинг бакалавра");
                 return;

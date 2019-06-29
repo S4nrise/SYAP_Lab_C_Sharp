@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SYAP_Lab_C_Sharp</RootNamespace>
     <AssemblyName>SYAP_Lab_C_Sharp</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,11 +61,11 @@
     </Compile>
     <Compile Include="Classes\Bachelor.cs" />
     <Compile Include="Classes\Students.cs" />
+    <Compile Include="Iterato\InterfaceIterator.cs" />
     <Compile Include="Logic\BusinessLogic.cs" />
     <Compile Include="Classes\Master.cs" />
     <Compile Include="Classes\NoneStudentsException.cs" />
     <Compile Include="Classes\Student.cs" />
-    <Compile Include="Iterator\InterfaceIterator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +74,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Iterato\Read.cs" />
+    <Compile Include="Iterato\Search.cs" />
+    <Compile Include="Iterato\SearchFaculty.cs" />
+    <Compile Include="Iterato\SearchFName.cs" />
+    <Compile Include="Iterato\SearchSName.cs" />
+    <Compile Include="Iterato\SearchThemeWork.cs" />
     <EmbeddedResource Include="AddBachelorStudentForm.resx">
       <DependentUpon>AddBachelorStudentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +97,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
